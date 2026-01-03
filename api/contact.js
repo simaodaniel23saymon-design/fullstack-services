@@ -5,9 +5,13 @@ export default async function handler(req, res) {
 
   const { name, email, message } = req.body;
 
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: "Dados incompletos" });
+  }
+
+  // 👉 Aqui entra Gmail / WhatsApp / BD depois
+
   return res.status(200).json({
-    success: true,
-    message: "Mensagem recebida",
-    data: { name, email, message }
+    message: "Mensagem enviada com sucesso!"
   });
 }

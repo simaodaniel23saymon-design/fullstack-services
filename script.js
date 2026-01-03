@@ -1,31 +1,34 @@
 const form = document.getElementById("contactForm");
-const responseEl = document.getElementById("response");
+const responseText = document.getElementById("response");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const formData = new FormData(form);
+  responseText.textContent = "A enviar...";
 
   const data = {
-    name: formData.get("name"),
-    email: formData.get("email"),
-    message: formData.get("message"),
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    message: document.getElementById("message").value
   };
 
   try {
-    const res = await fetch("/api/contact", {
+    const response = await fetch("/api/contact", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     });
 
-    const result = await res.json();
+    const result = await response.json();
 
-    responseEl.innerText = result.message || "Mensagem enviada!";
-    form.reset();
-  } catch (err) {
-    responseEl.innerText = "Erro ao enviar mensagem.";
+    if (response.ok) {
+      responseText.textContent = result.message;
+      form.reset();
+    } else {
+      responseText.textContent = "Erro ao enviar mensagem.";
+    }
+
+  } catch (error) {
+    responseText.textContent = "Erro de ligação com o servidor.";
   }
 });
