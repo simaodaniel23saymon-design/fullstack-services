@@ -9,12 +9,14 @@
 
   <h1>Contacto</h1>
 
-  <form method="POST" action="/api/contact">
-    <input type="text" name="name" placeholder="Nome" required><br><br>
-    <input type="email" name="email" placeholder="Email" required><br><br>
-    <textarea name="message" placeholder="Mensagem" required></textarea><br><br>
-    <button type="submit">Enviar</button>
-  </form>
+ <form id="contactForm">
+  <input type="text" name="name" placeholder="Nome" required><br><br>
+  <input type="email" name="email" placeholder="Email" required><br><br>
+  <textarea name="message" placeholder="Mensagem" required></textarea><br><br>
+  <button type="submit">Enviar</button>
+</form>
+
+<p id="response"></p>
 
 </body>
 </html>
